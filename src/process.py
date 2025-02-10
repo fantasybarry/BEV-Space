@@ -44,7 +44,7 @@ class transfer:
 
     # Transform the selected ROI
     def transform(self, image):
-
+        # Select the 
         pt_A = [500, 353]
         pt_B = [797, 353]
         pt_C = [1091, 483]
@@ -59,7 +59,7 @@ class transfer:
         maxHeight = max(int(height_AD), int(height_BC))
         
         srcPts = np.float32([pt_A, pt_B, pt_C, pt_D])
-        dtPts = np.float32([0, 0], [0, maxHeight - 1], [maxWidth - 1, maxHeight - 1], [maxWidth - 1, 0])
+        dtPts = np.float32([[0, 0], [maxWidth - 1, 0], [maxWidth - 1, maxHeight - 1], [0, maxHeight - 1]])
 
         matrix = cv.getPerspectiveTransform(srcPts, dtPts)
         transformed_frame = cv.warpPerspective(image, matrix, (maxWidth, maxHeight), flags = cv.INTER_LINEAR)
